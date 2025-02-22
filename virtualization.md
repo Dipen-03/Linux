@@ -218,7 +218,58 @@ checking version for verification:
 
 3. Pull an official image:
 
-                sudo docker pull nginx
+                 docker pull nginx
+
+
+
+4. Run the nginx container
+
+             docker run -d -p 8080:80 nginx
+
+             ![alt text](<docker pull nginx.jpg>)
+
+5. Check running containers
+
+                docker ps   
+
+
+6. Check external IP (using curl)
+
+              curl ifconfig.me
+
+7.  Stop and remove the container
+                docker stop my-nginx
+                docker rm my-nginx
+
+
+screenshoot:
+![alt text](<docker stop.jpg>)
+
+
+### **Problem Encountered:**
+Here’s the issue I encountered while working with Docker:
+
+Problem:
+When I tried to stop the container after running Nginx (step 5), I received an error:
+
+                docker stop nginx
+                Error response from daemon: No such container: nginx
+
+This happened because I had created a new container with the name zealous_meitner (not nginx), so the stop command using the incorrect name (nginx) led to the error.
+
+Solution:
+To resolve this, I had to use the correct container name (zealous_meitner):
+                docker stop zealous_meitner
+                docker rm zealous_meitner
+
+screenshoot of problem:
+![alt text](<docker problem.jpg>)
+
+
+
+
+
+
 
 
 
