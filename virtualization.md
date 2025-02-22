@@ -49,15 +49,19 @@ screenshot:
 ### **Step 2: Test Multipass Commands**
 
 1. Launch a default Ubuntu instance
+
         multipass launch --name dipen-vm
 
 2. Show running instances
+
             multipass list
 
 3. Show instance details
+
         multipass info dipen-vm
 
 4. Access instance shell
+
          multipass shell dipen-vm
 
 screenshot:
@@ -65,15 +69,19 @@ screenshot:
 
 
 5. Run command inside instance
+
          multipass exec dipen-vm -- ls
 
 6. Stop instance
+
         multipass stop dipen-vm
 
 7. Delete instance
+
          multipass delete dipen-vm
 
 8. Clean up deleted instances
+
             multipass purge
 
 screenshot:
@@ -85,14 +93,132 @@ screenshot:
 ### **Step 3: Cloud-Init Configuration**
 
 1. Create a file named cloud-init.yaml:
+
         nano cloud-init.yaml
 
 screenshot:
 ![alt text](<cloud-init 1.jpg>)
 
 2. Launch an instance with cloud-init
+
         multipass launch --name dipen-vm --cloud-init cloud-init.yaml
 
+
     
+3. Create a new folder and Mount the folder inside a VM:
+
+        mkdir -p ~/multipass-share
+        multipass mount ~/multipass-share dipen-vm:/mnt/shared
+
+
+
+4. Verify the shared folder inside the Multipass instance
+
+        multipass shell dipen-vm
+        ls /mnt/shared
+
+
+5.  create a test file in the shared folder
+
+        echo "Hello from Multipass" > /mnt/shared/testfile.txt
+
+6. Check if the file appears on the host
+
+
+        ls ~/multipass-share
+
+7. Unmount the shared folder after done
+
+        multipass umount dipen-vm:/mnt/shared
+
+screenshoot:
+![alt text](<cloud-init 2.jpg>)
+
+
+## **Part 3: Exploring LXD**
+
+### **Step 1: Install LXD**
+        sudo snap install lxd
+
+
+### **Step 2: Initialize LXD**
+        lxd init
+
+
+
+### **Step 3: Create and Manage Containers**
+
+1. Launch a new LXD container
+
+            lxc launch ubuntu:24.04 my-container
+
+2. List running containers
+
+            lxc list
+
+screenshot:
+![alt text](<lxd install1.jpg>)
+
+
+
+3. Enter the container shell
+
+            lxc exec my-container -- bash
+
+4. Run a command inside the container
+
+            cat /etc/os-release
+
+
+5. Exit the container
+         
+           exit
+
+6.  Stop the container
+
+
+            lxc stop my-container
+
+
+7. Delete the container
+
+            lxc delete my-container
+
+
+screenshoot:
+![alt text](<lxc bash-stop.jpg>)
+
+
+
+## **Part 4: Stick Apps with Docker**
+
+I understand the basic concept of docker by visiting the site:
+
+![alt text](<docker understanding.jpg>)
+
+### **Installation of docker in Linux**
+
+        curl -fsSL https://get.docker.com -o get-docker.sh
+
+checking version for verification:
+
+![alt text](<docker version.jpg>)
+
+### **Experiment with Docker**
+
+1. Check if Docker is working by running a test container:              
+
+                sudo docker run hello-world
+
+![alt text](<decker helloworls.jpg>)
+
+2. List running containers:
+
+                sudo docker ps -a
+
+3. Pull an official image:
+
+                sudo docker pull nginx
+
 
 
