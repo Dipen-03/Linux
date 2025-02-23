@@ -226,7 +226,8 @@ checking version for verification:
 
              docker run -d -p 8080:80 nginx
 
-             ![alt text](<docker pull nginx.jpg>)
+
+![alt text](<docker pull nginx.jpg>)
 
 5. Check running containers
 
@@ -264,6 +265,120 @@ To resolve this, I had to use the correct container name (zealous_meitner):
 
 screenshoot of problem:
 ![alt text](<docker problem.jpg>)
+
+
+
+## **Part 5: Snaps for Self-Contained Applications**
+
+### **Key Points on Snapcraft and Snaps**
+1. What is Snapcraft?
+
+Snapcraft is a tool for building, packaging, and publishing software as Snaps.
+It allows applications to run on different Linux distributions without modification.
+
+2. What are Snaps?
+
+Snaps are self-contained application packages that include all dependencies.
+They ensure software runs consistently across various Linux distributions.
+
+3. Features of Snaps:
+
+-Dependency Management: Snaps bundle all required libraries.
+-Automatic Updates: Snaps update automatically in the background.
+-Security & Sandboxing: Snaps run in isolation, improving security.
+-Cross-Distribution Support: Work on Ubuntu, Debian, Fedora, Arch, and more.
+
+
+### **Experiment**
+
+#### **Step 1: Install Snapcraft**
+
+I try to install snapcraft by running the command:
+                   
+                sudo apt update && sudo apt install snapcraft -y
+
+
+I found some erro like this:
+                No apt package "snapcraft", but there is a snap with that name.
+                Try "snap install snapcraft"
+
+
+
+
+
+and after that, I run the command:
+
+                sudo snap install snapcraft --classic
+
+
+then, snapcraft is successfully installed:
+
+![alt text](<snap installation-1.jpg>)
+
+
+#### **Step 2: Create a Snap Project**
+
+                mkdir my-snap-app && cd my-snap-app
+                snapcraft init
+
+Output:
+
+                Go to https://docs.snapcraft.io/the-snapcraft-format/8337 for more information about the snapcraft.yaml format.
+                Successfully initialised project.
+
+
+#### **Step 3: Create the Application Script**
+
+                mkdir bin
+                nano bin/hello.sh
+
+I Added the following content inside hello.sh:
+
+                #!/bin/bash
+                echo "Hello from my snap!"
+
+![alt text](<nano snapcraft.yaml2.jpg>)
+
+Save and exit. Then, make it executable:
+        
+                chmod +x bin/hello.sh
+
+
+![alt text](<snapcraft step2.jpg>)
+
+
+#### **Step 4: Modify snapcraft.yaml**
+Open the configuration file:
+
+                nano snap/snapcraft.yaml
+
+Modify it to:
+
+![alt text](<snapcraft yaml correct.jpg>)
+
+
+#### **Step 5: Build the Snap**
+
+                snapcraft
+
+Output:
+
+                Packed my-snap-app_0.1_amd64.snap
+
+#### **Step 6: Install and Run the Snap**
+
+Install it using:
+
+                sudo snap install my-snap-app_*.snap --devmode
+
+
+Output:
+
+                Hello from my snap!
+
+
+screenshoot:
+![alt text](<snapcraft final.jpg>)
 
 
 
