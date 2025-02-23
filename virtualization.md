@@ -1,4 +1,5 @@
 # Assignment 7 - Virtualization  
+Submitted by: Dipen Gaihre
 
 ## **Part 1: Introduction to Virtualization**  
 
@@ -44,6 +45,7 @@ Containers are lightweight, standalone, and executable software packages that in
             sudo snap install multipass
 
 screenshot:
+
 ![alt text](<multipass install 1.jpg>)
 
 ### **Step 2: Test Multipass Commands**
@@ -65,6 +67,7 @@ screenshot:
          multipass shell dipen-vm
 
 screenshot:
+
 ![alt text](multipass2.jpg)
 
 
@@ -85,6 +88,7 @@ screenshot:
             multipass purge
 
 screenshot:
+
 ![alt text](multipass3.jpg)
 
 
@@ -97,6 +101,7 @@ screenshot:
         nano cloud-init.yaml
 
 screenshot:
+
 ![alt text](<cloud-init 1.jpg>)
 
 2. Launch an instance with cloud-init
@@ -132,6 +137,7 @@ screenshot:
         multipass umount dipen-vm:/mnt/shared
 
 screenshoot:
+
 ![alt text](<cloud-init 2.jpg>)
 
 
@@ -157,6 +163,7 @@ screenshoot:
             lxc list
 
 screenshot:
+
 ![alt text](<lxd install1.jpg>)
 
 
@@ -244,6 +251,7 @@ checking version for verification:
 
 
 screenshoot:
+
 ![alt text](<docker stop.jpg>)
 
 
@@ -260,10 +268,12 @@ This happened because I had created a new container with the name zealous_meitne
 
 Solution:
 To resolve this, I had to use the correct container name (zealous_meitner):
+                
                 docker stop zealous_meitner
                 docker rm zealous_meitner
 
 screenshoot of problem:
+
 ![alt text](<docker problem.jpg>)
 
 
@@ -283,9 +293,9 @@ They ensure software runs consistently across various Linux distributions.
 
 3. Features of Snaps:
 
--Dependency Management: Snaps bundle all required libraries.
+-Dependency Management: Snaps bundle all required libraries.\
 -Automatic Updates: Snaps update automatically in the background.
--Security & Sandboxing: Snaps run in isolation, improving security.
+-Security & Sandboxing: Snaps run in isolation, improving security.\
 -Cross-Distribution Support: Work on Ubuntu, Debian, Fedora, Arch, and more.
 
 
@@ -299,6 +309,7 @@ I try to install snapcraft by running the command:
 
 
 I found some erro like this:
+
                 No apt package "snapcraft", but there is a snap with that name.
                 Try "snap install snapcraft"
 
