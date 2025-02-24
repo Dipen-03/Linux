@@ -1,8 +1,9 @@
 # Linux
+
 Account Setup
 In the first step, I have created a Microsoft Azsure account using our university email address. Then, my microsoft azsure account is successfully created and I have recevied $100 worth of credit which helps me to purchase different types of useful learning environment.
 
-# Create Virtual Machine
+## Create Virtual Machine
 I have created a virtual machine where I can learn and do some projects for this course.
 Then, I named the machine "lab-robotics" and then I have select the no infrastructure redundancy required option and Trusted launch virtual machines security type.
 I choosed Ubuntu Server 24.04 LTS - x64 Gen2 server and B series version 2 which is Standard_B21s_v2.
@@ -11,17 +12,17 @@ There is a copy and execute SSH command button, I have pasted the key which I ha
 Then open the windows powershell and paste the link generated link there and I reached in the Linux virtual machine.
 It help us to use Linux in windows laptop without installing it.
 
-# Linking my GitHub account to my HAMK email
+### *Linking my GitHub account to my HAMK email*
 I created a new repository named "Linux" for the assignment.
 Then I linked my HAMK email as a secondary mail for version control.
 
-# screenshoot
-![alt text](linux.jpg) 
+**screenshoot**
+![alt text](linux.jpg)
 ![alt text](<microsoft azure.jpg>)
 
 
-# assignment 3
-# User Management and File System access
+# # Assignment  3
+## User Management and File System access
 I have created user accounts on my Linux system to manage access 
 and permissions.
 
@@ -74,14 +75,14 @@ the directory permissions using ls -ld /opt/projekti. The expected output was:
         drwxrws--- 2 root projekti 4096 Jan 30 18:37 /opt/projekti  
 
 
-# screenshoot
+### screenshoot
 ![alt text](assignment_3_ss.jpg)
 
 
 
 # Assignment 6(APT)
 
-# 1.Checking  system’s APT version:
+## 1. Checking  system’s APT version:
 Run the following command to display the installed APT version:
 
                 apt --version
@@ -90,7 +91,7 @@ Output :
 
                 apt 2.7.14 (amd64)
 
-# 2.Update the package list:
+## 2. Update the package list:
 
 Run the command:
                 
@@ -127,7 +128,7 @@ to ensure that all installed packages can be updated to
 their latest versions. Regularly updating the package list
 helps maintain system stability and security.
 
-# 3.Upgrade installed packages:
+## 3. Upgrade installed packages:
 
 Run:
 
@@ -141,7 +142,7 @@ update refreshes the package list without installing anything.
 upgrade installs the latest versions of the installed packages.
 
 
-# 4.View pending updates (if any):
+## 4. View pending updates (if any):
 
 Run:
 
@@ -152,8 +153,8 @@ Output:
                 Listing... Done
 
 
-# Part 2: Installing & Managing Packages (20 min)
-# Search for a package using APT:
+##  *Part 2: Installing & Managing Packages (20 min)*
+### Search for a package using APT:
 Find an image editor using:
 
                 apt search image editor
@@ -161,7 +162,7 @@ Find an image editor using:
 
 From the packages I choose GIMP package.
 
-# 6. View package details:
+## 6. View package details:
 
 Get detailed information about the selected package:
                 
@@ -192,7 +193,7 @@ The output of dependencies required by the packages are given below:
                   libxpm4, zlib1g (>= 1:1.1.4)
 
 
-# Install the package:
+## Install the package:
 
 Run:
 
@@ -209,7 +210,7 @@ output:
                         Description: GNU Image Manipulation Program
 
 
-# Check installed package version:
+## Check installed package version:
 
 Run:
 
@@ -225,7 +226,7 @@ What version was installed?
 The installed version of GIMP is 2.10.36-3ubuntu0.24.04.1.
 
 
-# Part 3: Removing & Cleaning Packages (10 min)
+## *Part 3: Removing & Cleaning Packages (10 min)*
 Uninstall the package:
 
 Run:
@@ -249,7 +250,7 @@ Is the package fully removed?
 
 Yes the package is removed.
 
-# 11. Remove configuration files as well:
+## 11. Remove configuration files as well:
 
 Run:
 
@@ -264,7 +265,7 @@ What is the difference between remove and purge?
 -purge: Uninstalls the package and deletes its configuration files.
 purge is generally used when you want to do a more complete uninstallation.
 
-# Clear unnecessary package dependencies:
+## Clear unnecessary package dependencies:
 Run:
 
                 sudo apt autoremove -y
@@ -276,7 +277,7 @@ Running sudo apt autoremove -y is an important step because
 it ensures that our system is free from unnecessary packages,
  frees up disk space, and helps maintain system stability and performance.
 
-# 12.Clean up downloaded package files:
+## 12.Clean up downloaded package files:
 Run:
 
                         sudo apt clean
@@ -286,8 +287,8 @@ The sudo apt clean command is used to remove all downloaded package files
 from the local cache, freeing up disk space while having no effect on the 
 actual installed packages.
 
-# Part 4: Managing Repositories & Troubleshooting (15 min)
-# 13.List all APT repositories:
+## *Part 4: Managing Repositories & Troubleshooting (15 min)*
+## 13. List all APT repositories:
 Run:
 
                         cat /etc/apt/sources.list
@@ -304,7 +305,7 @@ and the actual repository configurations are now maintained in
 separate files in the /etc/apt/sources.list.d/ directory.
 
 
-# 14.Add a new repository (example: universe repository):
+## 14. Add a new repository (example: universe repository):
 Run:
 
                 sudo add-apt-repository universe
@@ -321,7 +322,7 @@ are maintained by the community rather than Canonical and typically receive less
 support or testing compared to those in the main repository.
 
 
-# 15.Simulate an installation failure and troubleshoot:
+## 15. Simulate an installation failure and troubleshoot:
 Try installing a non-existent package:
 
                         sudo apt install fakepackage
@@ -360,7 +361,7 @@ different repository or a Personal Package Archive (PPA). In such cases,
 you may need to add the relevant PPA or search for an alternative installation method.
 
 
-# Bonus Challenge (Optional):
+## Bonus Challenge (Optional):
 
 Use apt-mark to hold and unhold a package so it doesn't get updated.
 
@@ -379,7 +380,7 @@ which helps me maintain stability and control over my setup.
 
 
 
-# some screenshoot:
+## some screenshoot:
 ![alt text](dependencies.jpg) 
 ![alt text](<last ss.jpg>) 
 ![alt text](ss.jpg)
