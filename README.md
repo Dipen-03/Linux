@@ -384,3 +384,109 @@ which helps me maintain stability and control over my setup.
 ![alt text](dependencies.jpg) 
 ![alt text](<last ss.jpg>) 
 ![alt text](ss.jpg)
+
+
+
+
+# ASSIGNMENT 8
+# (Firewall Configuration Report)
+## Introduction
+This report outlines the firewall setup designed to 
+secure a server by allowing essential services, blocking
+ unauthorized access, and mitigating common network threats. 
+ The firewall rules serve the following purposes:
+-Permit critical services (OpenSSH, HTTP, and HTTPS).
+-Log both allowed and blocked connections for monitoring.
+-Protect against SYN flood and other common network attacks.
+
+## Firewall Rules and Explanations
+
+### 1. Allow OpenSSH (Port 22)
+
+                sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+                sudo iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
+
+Purpose: Grants SSH access for remote administration.
+Reasoning: SSH is essential for securely managing the server.
+These rules ensure that only new and established SSH connections are permitted.
+
+### 2. Allow Web Traffic (HTTP & HTTPS - Ports 80 & 443)
+
+                sudo iptables -A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+                sudo iptables -A INPUT -p tcp --dport 443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+                sudo iptables -A OUTPUT -p tcp --sport 80 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+                sudo iptables -A OUTPUT -p tcp --sport 443 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
+
+Purpose: Allows web traffic through HTTP and HTTPS.
+Reasoning: These rules enable the server to host web 
+services while ensuring secure communication over HTTPS.
+
+
+### 3. Log and Block Unauthorized Access
+
+
+                sudo iptables -A INPUT -j LOG --log-prefix "Blocked Connection: "
+                sudo iptables -A INPUT -j DROP
+
+
+
+Purpose: Logs and blocks any unauthorized connection attempts.
+Reasoning: This helps track and analyze potential threats by 
+logging unauthorized access attempts before dropping them.
+
+
+### 4. Prevent SYN Flood Attacks
+
+
+                sudo iptables -A INPUT -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT
+
+Purpose: Protects against SYN flood attacks by restricting the rate of incoming TCP connection requests.
+Reasoning: Attackers often use SYN floods to overwhelm a server. Limiting the connection rate helps prevent such attacks.
+
+
+### 5. SSH Brute Force Protection
+
+                sudo iptables -A INPUT -p tcp --dport 22 -m recent --set
+                sudo iptables -A INPUT -p tcp --dport 22 -m recent --update --seconds 60 --hitcount 3 -j REJECT --reject-with tcp-reset
+
+
+Purpose: Restricts multiple failed SSH login attempts.
+Reasoning: Prevents brute-force attacks by rejecting SSH connection attempts after three failed logins within a minute.
+
+
+
+### 6. Prevent ICMP (Ping) Flood Attacks
+
+                sudo iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/s -j ACCEPT
+                sudo iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+
+
+Purpose: Limits excessive ICMP echo requests (ping) to prevent DoS attacks.
+Reasoning: Prevents attackers from overwhelming the server with a flood of ping 
+requests, which could degrade network performance.
+
+### 7. Block Invalid Packets
+
+                sudo iptables -A INPUT -m state --state INVALID -j DROP
+
+
+Purpose: Drops invalid packets to reduce attack vectors.
+Reasoning: Attackers sometimes send malformed or invalid packets to exploit vulnerabilities. Blocking them enhances security.
+
+
+
+###  8. Log Blocked Traffic
+
+
+                sudo iptables -A INPUT -j LOG --log-prefix "BLOCKED_TRAFFIC: " --log-level 4
+
+
+Purpose: Logs all blocked traffic for security auditing.
+Reasoning: Helps in monitoring and investigating unauthorized access attempts.
+
+
+
+### Conclusion
+This firewall configuration ensures that only essential services are accessible while blocking unauthorized connections. It also provides protection against common attacks such as SYN floods and ICMP floods. The logging mechanism aids in efficiently tracking security incidents, enhancing the overall security of the server.

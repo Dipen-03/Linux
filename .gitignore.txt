@@ -1,4 +1,0 @@
-*.jpg
-*.png
-!images/
-!virtualization images/
